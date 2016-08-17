@@ -92,7 +92,9 @@
     "plugin_loading": {
         "use_whitelist": false,
         "blacklist": [
-            "update"
+            "update",
+            "oboobs",
+            "obutts"
         ],
         "whitelist": []
     },
