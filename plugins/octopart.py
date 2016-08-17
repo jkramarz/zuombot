@@ -26,7 +26,7 @@ def load_key(bot):
     api_key = bot.config.get("api_keys", {}).get("octopart", None)
 
 
-@hook.command("octopart", "octo")
+@hook.command("octopart")
 def octopart(text, reply):
     """octopart <keyword> -- Search for any part on the Octopart database."""
     if not api_key:
@@ -36,7 +36,8 @@ def octopart(text, reply):
         'apikey': api_key,
         'q': text,
         'start': 0,
-        'limit': 1
+        'limit': 1,
+        'include': 'datasheets'
     }
 
     try:
@@ -55,6 +56,6 @@ def octopart(text, reply):
 
     for result in results:
         part = result['item']
-
+        datasheet = next(filter(lambda x: x[-4:] == '.pdf', map(lambda x: x['url'], result['item']['datasheets'])))
         # print matched part
-        reply("{} - {} - {}".format(part['brand']['name'], part['mpn'], part['octopart_url']))
+        reply("{} - {} - {}".format(part['brand']['name'], part['mpn'], datasheet))
