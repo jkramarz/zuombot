@@ -241,12 +241,11 @@ class CloudBot:
         if event.type is EventType.message:
             # Commands
             if event.chan.lower() == event.nick.lower():  # private message, no command prefix
-                command_re = r'(?i)^(?:[{}]?|{}[,;:]+\s+)(\w+)(?:$|\s+)(.*)'.format(command_prefix, event.conn.nick)
+                command_re = r'(?i)^(?:{}[,;:]+\s+)(\w+)(?:$|\s+)(.*)'.format(event.conn.nick)
             else:
-                command_re = r'(?i)^(?:[{}]|{}[,;:]+\s+)(\w+)(?:$|\s+)(.*)'.format(command_prefix, event.conn.nick)
+                command_re = r'(?i)^(?:{}[,;:]+\s+)(\w+)(?:$|\s+)(.*)'.format(event.conn.nick)
 
             cmd_match = re.match(command_re, event.content)
-
             if cmd_match:
                 command = cmd_match.group(1).lower()
                 if command in self.plugin_manager.commands:
