@@ -93,8 +93,7 @@
         "use_whitelist": false,
         "blacklist": [
             "update",
-            "oboobs",
-            "obutts"
+            "oboobs"
         ],
         "whitelist": []
     },
